@@ -1,0 +1,110 @@
+{
+  "learning": {
+    "_notes": [
+      "Dev note: Ensure that tests/test_bin/test_train/test_main.py's data is ",
+      "representative of this!"
+    ],
+    "train_dataloader": {
+      "batch_size": 16,
+      "shuffle": true,
+      "pin_memory": true,
+      "drop_last": true,
+      "num_workers": 0
+    },
+    "val_dataloader": {},
+    "trainer": {
+      "accelerator": "gpu",
+      "devices": 1,
+      "max_epochs": 100
+    },
+    "trainer_fit_kwargs": {}
+  },
+  "data": {
+    "_notes": [
+      "Dev note: Ensure that tests/test_bin/test_train/test_main.py's data is ",
+      "representative of this!"
+    ],
+    "train": {
+      "start_seconds": null,
+      "stop_seconds": -9.0,
+      "ny": 8192
+    },
+    "validation": {
+      "start_seconds": -9.0,
+      "stop_seconds": null,
+      "ny": null
+    },
+    "common": {
+      "x_path": "C:\\path\\to\\source.wav",
+      "y_path": "C:\\path\\to\\target.wav",
+      "delay": 0
+    }
+  },
+  "model": {
+    "_notes": [
+      "Dev note: Ensure that tests/test_bin/test_train/test_main.py's data is ",
+      "representative of this!"
+    ],
+    "net": {
+      "name": "WaveNet",
+      "config": {
+        "layers_configs": [
+          {
+            "condition_size": 1,
+            "input_size": 1,
+            "channels": 16,
+            "head_size": 8,
+            "kernel_size": 3,
+            "dilations": [
+              1,
+              2,
+              4,
+              8,
+              16,
+              32,
+              64,
+              128,
+              256,
+              512
+            ],
+            "activation": "Tanh",
+            "gated": false,
+            "head_bias": false
+          },
+          {
+            "condition_size": 1,
+            "input_size": 16,
+            "channels": 8,
+            "head_size": 1,
+            "kernel_size": 3,
+            "dilations": [
+              1,
+              2,
+              4,
+              8,
+              16,
+              32,
+              64,
+              128,
+              256,
+              512
+            ],
+            "activation": "Tanh",
+            "gated": false,
+            "head_bias": true
+          }
+        ],
+        "head_scale": 0.02
+      }
+    },
+    "optimizer": {
+      "lr": 0.004
+    },
+    "lr_scheduler": {
+      "class": "ExponentialLR",
+      "kwargs": {
+        "gamma": 0.993
+      }
+    }
+  }
+}
